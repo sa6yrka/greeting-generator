@@ -4,8 +4,7 @@ import { ToneType } from '../types/toneType'
 import { LANGUAGES } from '../constants/languages'
 import type { LanguageType } from '../types/languageType'
 import { generateGreeting } from '../services/gemini'
-import { OccasionButton } from './OccasionButton'
-import { Cake, Snowflake } from 'lucide-react'
+import { OccasionSelector } from './OccasionSelector'
 
 export const Editor = () => {
   const [occasion, setOccasion] = useState<OccasionType>(OccasionType.BIRTHDAY)
@@ -63,28 +62,7 @@ export const Editor = () => {
         <p>{error}</p>
       </div>
 
-      <section className='space-y-4'>
-        <div className='flex justify-between items-center'>
-          <h3 className='text-lg font-bold text-gray-900 flex items-center gap-2'>
-            <span
-              className='flex items-center justify-center w-6 h-6 rounded-full bg-gray-900 text-white text-xs'>1</span>
-            Выберите праздник
-          </h3>
-        </div>
-
-        <div className='grid grid-cols-2 gap-4'>
-          <OccasionButton
-            icon={Cake} label={OccasionType.BIRTHDAY}
-            isSelected={occasion === OccasionType.BIRTHDAY}
-            onClick={() => setOccasion(OccasionType.BIRTHDAY)}
-          />
-          <OccasionButton
-            icon={Snowflake} label={OccasionType.NEW_YEAR}
-            isSelected={occasion === OccasionType.NEW_YEAR}
-            onClick={() => setOccasion(OccasionType.NEW_YEAR)}
-          />
-        </div>
-      </section>
+      <OccasionSelector occasion={occasion} setOccasion={setOccasion} />
 
       <div>
         <div>
