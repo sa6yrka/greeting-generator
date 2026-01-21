@@ -4,7 +4,6 @@ import { ToneType } from '../types/toneType'
 import { LANGUAGES } from '../constants/languages'
 import type { LanguageType } from '../types/languageType'
 import { generateGreeting } from '../services/gemini'
-import { HeaderLayout } from './HeaderLayout'
 
 export const Editor = () => {
   const [occasion, setOccasion] = useState<OccasionType>(OccasionType.BIRTHDAY)
@@ -44,9 +43,7 @@ export const Editor = () => {
   }
 
   return (
-    <div className='max-w-7xl mx-auto'>
-      <HeaderLayout />
-
+    <div className='lg:col-span-5 sm:space-y-10 space-y-8'>
       <div>
         <p>{occasion}</p>
 

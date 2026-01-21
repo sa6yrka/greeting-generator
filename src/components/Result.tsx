@@ -1,3 +1,3 @@
 export const Result = () => {
-  return <div>Result</div>
+  return <div className='className="lg:col-span-7 h-full'>Result</div>
 }
