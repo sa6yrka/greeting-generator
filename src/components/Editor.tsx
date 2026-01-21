@@ -5,6 +5,7 @@ import { LANGUAGES } from '../constants/languages'
 import type { LanguageType } from '../types/languageType'
 import { generateGreeting } from '../services/gemini'
 import { OccasionSelector } from './OccasionSelector'
+import { RecipientForm } from './RecipientForm'
 
 export const Editor = () => {
   const [occasion, setOccasion] = useState<OccasionType>(OccasionType.BIRTHDAY)
@@ -64,35 +65,12 @@ export const Editor = () => {
 
       <OccasionSelector occasion={occasion} setOccasion={setOccasion} />
 
-      <div>
-        <div>
-          <label htmlFor='name'>Name: </label>
-          <input
-            id='name' type='text'
-            value={name} placeholder='Сабыржан'
-            onChange={(e) => setName(e.target.value)}
-          />
-        </div>
-
-        <div>
-          <label htmlFor='age'>Age: </label>
-          <input
-            type='text' id='age'
-            value={age} placeholder='18'
-            onChange={(e) => setAge(e.target.value)}
-          />
-        </div>
-
-        <div>
-          <label htmlFor='interests'>Interests: </label> <br />
-          <textarea
-            cols={30} rows={2} id='interests'
-            name='interests' value={interests}
-            placeholder='Traveling, Coding, Motorsport'
-            onChange={(e) => setInterests(e.target.value)}
-          ></textarea>
-        </div>
-      </div>
+      <RecipientForm
+        age={age} name={name}
+        error={error} interests={interests}
+        setAge={setAge} setName={setName}
+        setError={setError} setInterests={setInterests}
+      />
 
       <div>
         {Object.values(ToneType).map((tone) => (
