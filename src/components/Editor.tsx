@@ -6,6 +6,8 @@ import { generateGreeting } from '../services/gemini'
 import { OccasionSelector } from './OccasionSelector'
 import { RecipientForm } from './RecipientForm'
 import { GreetingSettings } from './GreetingSettings'
+import { GenerateButton } from './GenerateButton'
+import { Sparkles } from 'lucide-react'
 
 export const Editor = () => {
   const [occasion, setOccasion] = useState<OccasionType>(OccasionType.BIRTHDAY)
@@ -39,22 +41,7 @@ export const Editor = () => {
 
   return (
     <div className='lg:col-span-5 sm:space-y-10 space-y-8'>
-      <div>
-        <p>{occasion}</p>
-
-        <p>{name}</p>
-        <p>{age}</p>
-
-        <p>{interests}</p>
-
-        <p>{tone}</p>
-
-        <p>{language}</p>
-
-        <p>{generatedText}</p>
-
-        <p>{error}</p>
-      </div>
+      <p className='hidden'>{generatedText}</p>
 
       <OccasionSelector occasion={occasion} setOccasion={setOccasion} />
 
@@ -70,9 +57,10 @@ export const Editor = () => {
         tone={tone} setTone={setTone}
       />
 
-      <button onClick={handleGenerate} disabled={loading}>
-        Создать магию 🪄
-      </button>
+      <GenerateButton isLoading={loading} onClick={handleGenerate}>
+        <Sparkles className={`w-5 h-5 ${loading ? 'animate-spin' : 'group-hover:animate-pulse'}`} />
+        {loading ? 'Сочиняем...' : 'Сгенерировать'}
+      </GenerateButton>
     </div>
   )
 }
