@@ -13,8 +13,7 @@ export const generateGreeting = async (
   tone: ToneType,
   language: LanguageType,
 ): Promise<string> => {
-  try {
-    const prompt = `
+  const prompt = `
       Напиши уникальное поздравление на языке: ${language}.
       
       Повод: ${occasion},
@@ -39,21 +38,17 @@ export const generateGreeting = async (
       - Язык ответа СТРОГО: ${language}.
     `
 
-    const response = await ai.models.generateContent({
-      model: 'gemini-2.5-flash',
-      contents: prompt,
-      config: {
-        temperature: tone === ToneType.ADULT ? 0.9 : 0.8,
-      },
-    })
+  const response = await ai.models.generateContent({
+    model: 'gemini-2.5-flash',
+    contents: prompt,
+    config: {
+      temperature: tone === ToneType.ADULT ? 0.9 : 0.8,
+    },
+  })
 
-    if (response.text) {
-      return response.text
-    } else {
-      throw new Error('Failed to generate text')
-    }
-  } catch (error) {
-    console.error('Gemini text API error', error)
-    throw new Error('Gemini text API error')
+  if (!response.text) {
+    throw new Error('Failed to generate text')
   }
+
+  return response.text.trim()
 }
