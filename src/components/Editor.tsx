@@ -9,16 +9,20 @@ import { GreetingSettings } from './GreetingSettings'
 import { GenerateButton } from './GenerateButton'
 import { Sparkles } from 'lucide-react'
 
-export const Editor = () => {
+interface IEditorProps {
+  setGeneratedText: (text: string) => void
+}
+
+export const Editor = ({ setGeneratedText }: IEditorProps) => {
   const [occasion, setOccasion] = useState<OccasionType>(OccasionType.BIRTHDAY)
   const [name, setName] = useState<string>('')
   const [age, setAge] = useState<string>('')
   const [interests, setInterests] = useState<string>('')
   const [tone, setTone] = useState<ToneType>(ToneType.FRIENDLY)
   const [language, setLanguage] = useState<LanguageType>('Русский')
-  const [generatedText, setGeneratedText] = useState<string>('')
   const [loading, setLoading] = useState<boolean>(false)
   const [error, setError] = useState<string | null>(null)
+
   const handleGenerate = async (): Promise<void> => {
     if (!name.trim()) {
       setError('Пожалуйста, введите имя получателя.')
@@ -41,8 +45,6 @@ export const Editor = () => {
 
   return (
     <div className='lg:col-span-5 sm:space-y-10 space-y-8'>
-      <p className='hidden'>{generatedText}</p>
-
       <OccasionSelector occasion={occasion} setOccasion={setOccasion} />
 
       <RecipientForm
@@ -57,7 +59,7 @@ export const Editor = () => {
         tone={tone} setTone={setTone}
       />
 
-      <GenerateButton isLoading={loading} onClick={handleGenerate}>
+      <GenerateButton isDisabled={loading} onClick={handleGenerate}>
         <Sparkles className={`w-5 h-5 ${loading ? 'animate-spin' : 'group-hover:animate-pulse'}`} />
         {loading ? 'Сочиняем...' : 'Сгенерировать'}
       </GenerateButton>
