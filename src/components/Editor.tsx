@@ -3,6 +3,7 @@ import { OccasionType } from '../types/occasionType'
 import { ToneType } from '../types/toneType'
 import { LANGUAGES } from '../constants/languages'
 import type { LanguageType } from '../types/languageType'
+import { generateGreeting } from '../services/gemini'
 
 export const Editor = () => {
   const [occasion, setOccasion] = useState<OccasionType>(OccasionType.BIRTHDAY)
@@ -15,6 +16,19 @@ export const Editor = () => {
   const [tone, setTone] = useState<ToneType>(ToneType.FRIENDLY)
 
   const [language, setLanguage] = useState<LanguageType>('Русский')
+
+  const [generatedText, setGeneratedText] = useState<string>('')
+
+  const handleGenerate = async (): Promise<void> => {
+    if (!name.trim()) return
+
+    try {
+      const result = await generateGreeting(occasion, name, age, interests, tone, language)
+      setGeneratedText(result)
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   return (
     <div className='max-w-7xl mx-auto'>
@@ -29,6 +43,8 @@ export const Editor = () => {
         <p>{tone}</p>
 
         <p>{language}</p>
+
+        <p>{generatedText}</p>
       </div>
 
       <div>
@@ -90,6 +106,8 @@ export const Editor = () => {
           ))}
         </select>
       </div>
+
+      <button onClick={handleGenerate}>Создать магию 🪄</button>
     </div>
   )
 }
