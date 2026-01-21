@@ -10,17 +10,18 @@ import { GenerateButton } from './GenerateButton'
 import { Sparkles } from 'lucide-react'
 
 interface IEditorProps {
+  loading: boolean
+  setLoading: (loading: boolean) => void
   setGeneratedText: (text: string) => void
 }
 
-export const Editor = ({ setGeneratedText }: IEditorProps) => {
+export const Editor = ({ loading, setLoading, setGeneratedText }: IEditorProps) => {
   const [occasion, setOccasion] = useState<OccasionType>(OccasionType.BIRTHDAY)
   const [name, setName] = useState<string>('')
   const [age, setAge] = useState<string>('')
   const [interests, setInterests] = useState<string>('')
   const [tone, setTone] = useState<ToneType>(ToneType.FRIENDLY)
   const [language, setLanguage] = useState<LanguageType>('Русский')
-  const [loading, setLoading] = useState<boolean>(false)
   const [error, setError] = useState<string | null>(null)
 
   const handleGenerate = async (): Promise<void> => {
