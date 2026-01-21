@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { OccasionType } from '../types/occasionType'
 import { ToneType } from '../types/toneType'
-import { LANGUAGES } from '../constants/languages'
 import type { LanguageType } from '../types/languageType'
 import { generateGreeting } from '../services/gemini'
 import { OccasionSelector } from './OccasionSelector'
@@ -10,21 +9,14 @@ import { GreetingSettings } from './GreetingSettings'
 
 export const Editor = () => {
   const [occasion, setOccasion] = useState<OccasionType>(OccasionType.BIRTHDAY)
-
   const [name, setName] = useState<string>('')
   const [age, setAge] = useState<string>('')
-
   const [interests, setInterests] = useState<string>('')
-
   const [tone, setTone] = useState<ToneType>(ToneType.FRIENDLY)
-
   const [language, setLanguage] = useState<LanguageType>('Русский')
-
   const [generatedText, setGeneratedText] = useState<string>('')
-
   const [loading, setLoading] = useState<boolean>(false)
   const [error, setError] = useState<string | null>(null)
-
   const handleGenerate = async (): Promise<void> => {
     if (!name.trim()) {
       setError('Пожалуйста, введите имя получателя.')
@@ -73,32 +65,10 @@ export const Editor = () => {
         setError={setError} setInterests={setInterests}
       />
 
-      <GreetingSettings />
-
-      <div>
-        {Object.values(ToneType).map((tone) => (
-          <button
-            key={tone} type='button'
-            onClick={() => setTone(tone)}
-          >
-            {tone}
-          </button>
-        ))}
-      </div>
-
-      <div>
-        <label htmlFor='languages'>Languages: </label>
-        <select
-          id='languages' name='languages'
-          onChange={(e) => setLanguage(e.target.value as LanguageType)}
-        >
-          {LANGUAGES.map((language) => (
-            <option key={language} value={language}>
-              {language}
-            </option>
-          ))}
-        </select>
-      </div>
+      <GreetingSettings
+        language={language} setLanguage={setLanguage}
+        tone={tone} setTone={setTone}
+      />
 
       <button onClick={handleGenerate} disabled={loading}>
         Создать магию 🪄

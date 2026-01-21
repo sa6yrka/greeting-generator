@@ -38,6 +38,7 @@ export const RecipientForm = ({ age, name, error, interests, setAge, setName, se
               `}
             />
           </div>
+          {error && <p className='text-red-500 text-sm ml-1 mt-1 animate-pulse'>{error}</p>}
         </div>
 
         <div className='col-span-1 relative group'>
