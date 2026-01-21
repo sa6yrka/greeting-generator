@@ -69,7 +69,7 @@ export const RecipientForm = ({ age, name, error, interests, setAge, setName, se
           <textarea
             cols={30} rows={2} id='interests'
             name='interests' value={interests}
-            placeholder='Traveling, Coding, Motorsport'
+            placeholder='Путешествия, IT, гонки...'
             onChange={(e) => setInterests(e.target.value)}
             className='block w-full pl-9 pr-4 py-3 bg-white border-2 border-gray-100 rounded-xl text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-4 focus:ring-purple-100 focus:border-purple-500 transition-all resize-none'
           ></textarea>
