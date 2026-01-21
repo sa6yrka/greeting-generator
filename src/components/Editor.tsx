@@ -2,13 +2,12 @@ import { useState } from 'react'
 import { Occasion } from '../types/occasion'
 import { Tone } from '../types/tone'
 import type { Language } from '../types/language'
-import { generateGreeting } from '../services/gemini/generateGreeting'
 import { OccasionSelector } from './OccasionSelector'
 import { RecipientForm } from './RecipientForm'
 import { GreetingSettings } from './GreetingSettings'
 import { GenerateButton } from './GenerateButton'
 import { Sparkles } from 'lucide-react'
-import { generateGreetingImage } from '../services/gemini/generateGreetingImage'
+import { generateGreeting, generateGreetingImage } from '../services/gemini'
 
 interface IEditorProps {
   loading: boolean
