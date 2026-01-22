@@ -3,7 +3,11 @@ import { Check, Copy, ImageIcon, Sparkles } from 'lucide-react'
 import { useGreetingStore } from '../store/useGreetingStore'
 
 export const Result = () => {
-  const { loading, imageUrl, generatedText } = useGreetingStore()
+  const {
+    loading,
+    generatedText,
+    imageUrl,
+  } = useGreetingStore()
 
   const [copied, setCopied] = useState<boolean>(false)
 

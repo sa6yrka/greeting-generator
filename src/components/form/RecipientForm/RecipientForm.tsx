@@ -9,7 +9,6 @@ interface Props {
   interests: string,
   setAge: (age: string) => void,
   setName: (name: string) => void,
-  setError: (error: string | null) => void,
   setInterests: (interests: string) => void,
 }
 
