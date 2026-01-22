@@ -1,13 +1,14 @@
 import { useState } from 'react'
 import { Check, Copy, ImageIcon, Sparkles } from 'lucide-react'
+import { useGreetingStore } from '../store/useGreetingStore'
 
-interface IResultProps {
-  isLoading: boolean
-  generatedText: string
-  imageUrl: string | null
-}
+export const Result = () => {
+  const {
+    loading,
+    imageUrl,
+    generatedText,
+  } = useGreetingStore()
 
-export const Result = ({ isLoading, generatedText, imageUrl }: IResultProps) => {
   const [copied, setCopied] = useState<boolean>(false)
 
   const handleCopy = async (): Promise<void> => {
@@ -24,10 +25,11 @@ export const Result = ({ isLoading, generatedText, imageUrl }: IResultProps) => 
 
   return (
     <div className='lg:col-span-7 h-full'>
-      <div className='bg-white rounded-3xl p-6 sm:p-8 shadow-xl shadow-purple-100/50 h-full min-h-100 flex flex-col relative overflow-hidden border border-purple-50'>
+      <div
+        className='bg-white rounded-3xl p-6 sm:p-8 shadow-xl shadow-purple-100/50 h-full min-h-100 flex flex-col relative overflow-hidden border border-purple-50'>
         <div className='flex justify-between items-center mb-6'>
           <h3 className='font-bold text-lg text-gray-900'>Ваше поздравление</h3>
-          {generatedText && !isLoading && (
+          {generatedText && !loading && (
             <button
               onClick={handleCopy}
               className='text-gray-400 hover:text-purple-600 transition-colors p-2 rounded-full hover:bg-purple-50'
@@ -39,7 +41,7 @@ export const Result = ({ isLoading, generatedText, imageUrl }: IResultProps) => 
         </div>
 
         <div className='grow flex flex-col'>
-          {isLoading ? (
+          {loading ? (
             <div className='grow flex flex-col items-center justify-center text-center space-y-4 animate-pulse'>
               <div className='p-4 bg-purple-50 rounded-full'>
                 <Sparkles className='w-8 h-8 text-purple-400 animate-spin' />

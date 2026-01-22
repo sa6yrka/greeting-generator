@@ -8,15 +8,11 @@ import { GreetingSettings } from './form/GreetingSettings/GreetingSettings'
 import { GenerateButton } from './form/GenerateButton'
 import { Sparkles } from 'lucide-react'
 import { generateGreeting, generateGreetingImage } from '../services/gemini'
+import { useGreetingStore } from '../store/useGreetingStore'
 
-interface IEditorProps {
-  loading: boolean
-  setLoading: (loading: boolean) => void
-  setGeneratedText: (text: string) => void
-  setImageUrl: (url: string | null) => void
-}
+export const Editor = () => {
+  const { loading, setLoading, setImageUrl, setGeneratedText } = useGreetingStore()
 
-export const Editor = ({ loading, setLoading, setGeneratedText, setImageUrl }: IEditorProps) => {
   const [occasion, setOccasion] = useState<Occasion>(Occasion.BIRTHDAY)
   const [name, setName] = useState<string>('')
   const [age, setAge] = useState<string>('')
